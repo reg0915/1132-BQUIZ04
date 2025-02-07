@@ -4,7 +4,7 @@ session_start();
 
 class DB{
     
-protected $dsn="mysql:host=localhost;charset=utf8;dbname=db01";
+protected $dsn="mysql:host=localhost;charset=utf8;dbname=db18";
 protected $pdo;
 protected $table;
 
@@ -74,7 +74,7 @@ function del($array){
 
 
 }
-function count(...$array){
+function count(...$arg){
     $sql="select count(*) from $this->table ";
     if(!empty($arg[0]) && is_array($arg[0])){
         $tmp=$this->arrayToSQL($arg[0]);
