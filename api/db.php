@@ -70,18 +70,17 @@ function del($array){
         $sql .= " where `id`='$array'";
     }
     
-    return $this->exec($sql);
+    return $this->pdo->exec($sql);
 
 
 }
-function count(...$arg){
-    // table後要設空白
+function count(...$array){
     $sql="select count(*) from $this->table ";
     if(!empty($arg[0]) && is_array($arg[0])){
         $tmp=$this->arrayToSQL($arg[0]);
         $sql .=" where ".join(" && ",$tmp);
     }else if(is_string($arg[0])){
-        $sql .= $arg[0];
+        $sql .=$arg[0];
     }
 
 if(!empty($arg[1])){
