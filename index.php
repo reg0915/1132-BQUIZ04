@@ -40,11 +40,11 @@
         <div id="right">
             <?php
 $do=$_GET['do']??'main';
-$file="back/".$do.".php";
+$file="front/".$do.".php";
 if(file_exists($file)){
         include $file;
 }else{
-        include "back/admin.php";
+        include "front/main.php";
 }
 
 
