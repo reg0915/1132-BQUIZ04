@@ -70,9 +70,7 @@ function reg() {
     if (acc == 'admin') {
         alert("不可使用admin做為帳號");
     } else {
-        $.get("api/chk_acc.php", {
-            acc: data.acc
-        }, function(res) {
+        $.get("api/chk_acc.php", {acc: data.acc}, function(res) {
             if (parseInt(res) >= 1) {
                 alert("帳號已被使用");
             } else {
