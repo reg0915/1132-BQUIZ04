@@ -1,7 +1,9 @@
-
+<?php 
+$row=$Mem->find($_GET['id']);
+?>
 <h2 class="ct">編輯會員資料</h2>
-<!-- table.all>tr*6>td.tt.ct+td.pp>input:text -->
- <form action="./api/reg.php"></form>
+<!-- form:post>table.all>tr*6>td.tt.ct+td.pp>input:text -->
+<form action="./api/reg.php" method="post">
 <table class="all">
     <tr>
         <td class="tt ct">帳號</td>
@@ -9,11 +11,11 @@
     </tr>
     <tr>
         <td class="tt ct">密碼</td>
-        <td class="pp"><?=str_repeat("*",strlen($row['acc']));?></td>
+        <td class="pp"><?=str_repeat("*",strlen($row['pw']));?></td>
     </tr>
     <tr>
         <td class="tt ct">姓名</td>
-        <td class="pp"><input type="text" name="name" id="name" value="<?=$row['name'];?>">></td>
+        <td class="pp"><input type="text" name="name" id="name" value="<?=$row['name'];?>"></td>
     </tr>
     <tr>
         <td class="tt ct">電子信箱</td>
@@ -33,5 +35,6 @@
     <input type="hidden" name="id" value="<?=$_GET['id'];?>">
     <input type="submit" value="編輯">
     <input type="reset" value="重置">
-    <input type="button" value="取消" onclick="">
+    <input type="button" value="取消" onclick="location.href='?do=mem'">
 </div>
+</form>
