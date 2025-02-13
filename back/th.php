@@ -19,7 +19,7 @@ foreach($bigs as $big):
     <tr>
     <td class="tt"><?=$big['name'];?></td>
         <td class="tt ct">
-            <button data-id="<?=$big['id'];?>">修改</button>
+            <button data-id="<?=$big['id'];?>" onclick="editType(<?=$big['id'];?>,this)">修改</button>
             <button>刪除</button>
         </td>
 </tr>
@@ -27,22 +27,17 @@ foreach($bigs as $big):
 if($Type->count(['big_id'=>$big['id']])>0):
     $mids=$Type->all(['big_id'=>$big['id']]);
     foreach($mids as $mid):
-
 ?>
-
 <tr class='ct'>
     <td class="pp"><?=$mid['name'];?></td>
         <td class="pp">
-            <button data-id="<?=$mid['id'];?>">修改</button>
+                    <button data-id="<?=$mid['id'];?>" onclick="editType(<?=$mid['id'];?>,this)">修改</button>
             <button>刪除</button>
         </td>
 </tr>
     <?php
         endforeach;
     endif;
-    ?>
-
-<?php
 endforeach;
 ?>
 
@@ -84,6 +79,24 @@ switch(type){
 })
 
     }
+
+function editType(id,dom){
+    let typeName=$(dom).parent().prev().text();
+    let name=prompt("請輸入你要修改的分類名稱",typeName)
+
+    $.post("./api/save_types.php",{id,name},function(res){
+      //  console.log(res);
+         //location.reload();
+        $(dom).parent().prev().text(name);
+    })
+
+
+
+}
+
+
+
+
 </script>
 
 
