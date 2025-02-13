@@ -26,6 +26,17 @@
                 <a href="?do=news">最新消息</a> |
                 <a href="?do=look">購物流程</a> |
                 <a href="?do=buycart">購物車</a> |
+                <?php
+if(empty($_SESSION['Mem'])){
+?>
+<a href=""></a>
+
+<?php
+}else{
+?>
+<?php
+}
+                ?>
                 <a href="?do=login">會員登入</a> |
                 <a href="?do=admin">管理登入</a>
             </div>
