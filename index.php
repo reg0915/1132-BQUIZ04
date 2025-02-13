@@ -18,10 +18,10 @@
 
     <div id="main">
         <div id="top">
-            <a href="index.php">
+            <a href="?">
                 <img src="./icon/0416.jpg" style="width:500px">
             </a>
-            <div style="padding:10px;display:inline-block;vertical-align: top;">
+            <div style="padding:10px;display:inline-block;vertical-align:top;">
                 <a href="?">回首頁</a> |
                 <a href="?do=news">最新消息</a> |
                 <a href="?do=look">購物流程</a> |
@@ -29,18 +29,29 @@
                 <?php
 if(empty($_SESSION['Mem'])){
 ?>
-<a href=""></a>
-
+                <a href="?do=login">會員登入</a> |
 <?php
 }else{
 ?>
+                <a href="./api/logout.php?table=Mem">登出</a> |
 <?php
 }
                 ?>
-                <a href="?do=login">會員登入</a> |
-                <a href="?do=admin">管理登入</a>
+                <?php 
+                if(empty($_SESSION['Admin'])){
+                ?>
+                <a href="?do=admin">管理登入</a> |
+                <?php
+                }else{
+                    ?>
+                <a href="back.php">返回管理</a> |
+                <?php 
+                    }
+                ?>
+
             </div>
-            情人節特惠活動 &nbsp; 為了慶祝七夕情人節，將舉辦情人兩人到現場有七七折之特惠活動~
+
+           
         </div>
         <div id="left" class="ct">
             <div style="min-height:400px;">
@@ -63,7 +74,7 @@ if(empty($_SESSION['Mem'])){
             ?>
         </div>
         <div id="bottom" style="line-height:70px;background:url(icon/bot.png); color:#FFF;" class="ct">
-            頁尾版權 : </div>
+        <?=$Bot->find(1)['bottom'];?></div>
     </div>
 
 </body>
