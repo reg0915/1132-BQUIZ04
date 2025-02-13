@@ -20,8 +20,7 @@
     </tr>
     <tr>
         <td class="tt ct">權限</td>
-        <td class="pp"></td>
-        <td></td>
+        <td class="pp">
         <div>
             <input type="checkbox" name="pr[]" value="1">商品分類與管理
         </div>
@@ -37,6 +36,7 @@
         <div>
             <input type="checkbox" name="pr[]" value="5">最新消息管理
         </div>
+        </td>
     </tr>
   </table>
   <div class="ct">
