@@ -1,4 +1,5 @@
 <h2 class="ct">商品分類</h2>
+
 <div class="ct">
     新增大分類
     <input type="text" name="big" id="big">
@@ -12,52 +13,51 @@
 </div>
 
 <table class="all">
-<?php
-$bigs=$Type->all(['big_id'=>0]);
-foreach($bigs as $big):
-?>
+    <?php
+    $bigs=$Type->all(['big_id'=>0]);
+    foreach($bigs as $big):
+    ?>
     <tr>
-    <td class="tt"><?=$big['name'];?></td>
+        <td class="tt"><?=$big['name'];?></td>
         <td class="tt ct">
             <button  onclick="editType(<?=$big['id'];?>,this)">修改</button>
             <button onclick="del('Type',<?=$big['id'];?>)">刪除</button>
         </td>
-</tr>
-<?php
-if($Type->count(['big_id'=>$big['id']])>0):
-    $mids=$Type->all(['big_id'=>$big['id']]);
-    foreach($mids as $mid):
-?>
-<tr class='ct'>
-    <td class="pp"><?=$mid['name'];?></td>
-        <td class="pp">
+    </tr>
+    <?php
+    if($Type->count(['big_id'=>$big['id']])>0):
+        $mids=$Type->all(['big_id'=>$big['id']]);
+        foreach($mids as $mid):
+    ?>
+            <tr class='ct'>
+                <td class="pp"><?=$mid['name'];?></td>
+                <td class="pp">
                     <button  onclick="editType(<?=$mid['id'];?>,this)">修改</button>
                     <button onclick="del('Type',<?=$mid['id'];?>)">刪除</button>
-        </td>
-</tr>
+                </td>
+            </tr>
     <?php
         endforeach;
-    endif;
-endforeach;
-?>
+      endif;
+    endforeach;
+    ?>
 
 </table>
-
 <script>
 getBigs();
 
-    function addType(type){
-let name,big_id;
-switch(type){
-    case 'big':
-        name=$("#big").val();
-        big_id=0;
-        break;
+function addType(type){
+    let name,big_id;
+    switch(type){
+        case 'big':
+            name=$("#big").val();
+            big_id=0;
+            break;
         case 'mid':
-        name=$("#mid").val();
+            name=$("#mid").val();
             big_id=$("#selbig").val();
-        break;
-}
+            break;
+    }
 
     $.post("./api/save_types.php",{name,big_id},function(){
                 /* if(type=='big'){
@@ -66,19 +66,15 @@ switch(type){
                 }else{
                     $("#mid").val("");
                 } */
-            location.reload();
-        })
+                location.reload();
+            })
+}
 
-    }
-
-
-
-    function getBigs(){
+function getBigs(){
     $.get("./api/get_bigs.php",function(bigs){
         $("#selbig").html(bigs)
-})
-
-    }
+    })
+}
 
 function editType(id,dom){
     let typeName=$(dom).parent().prev().text();
@@ -89,20 +85,8 @@ function editType(id,dom){
          //location.reload();
         $(dom).parent().prev().text(name);
     })
-
-
-
 }
-
-
-
-
 </script>
-
-
-
-
-
 
 
 
@@ -120,8 +104,8 @@ function editType(id,dom){
         <td class="ct">操作</td>
     </tr>
     <?php
-$rows=$Item->all();
-foreach($rows as $row):
+    $rows=$Item->all();
+    foreach($rows as $row):
     ?>
     <tr class="pp">
         <td class="ct"><?=$row['no'];?></td>
@@ -129,27 +113,24 @@ foreach($rows as $row):
         <td class="ct"><?=$row['stock'];?></td>
         <td class="ct"><?=($row['sh']==1)?"販售中":"已下架";?></td>
         <td class="ct">
-<button onclick="location.href='?do=edit_item&id=<?=$row['id'];?>'">修改</button>
-<button onclick="del('Item',<?=$row['id'];?>)">刪除</button>
-<button onclick="sh(<?=$row['id'];?>,1,this)">上架</button>
-<button onclick="sh(<?=$row['id'];?>,2,this)">下架</button>
+            <button onclick="location.href='?do=edit_item&id=<?=$row['id'];?>'">修改</button>
+            <button onclick="del('Item',<?=$row['id'];?>)">刪除</button>
+            <button onclick="sh(<?=$row['id'];?>,1,this)">上架</button>
+            <button onclick="sh(<?=$row['id'];?>,2,this)">下架</button>
 
         </td>
-</tr>
+    </tr>
     <?php
     endforeach;
     ?>
 </table>
 <script>
 
-    function sh(id,type,dom){
-        $.post("./api/sh.php",{type,id},function(){
+function sh(id,type,dom){
+    $.post("./api/sh.php",{type,id},function(){
         //location.reload();
 
         $(dom).parent().prev().text((type==1)?'販售中':'已下架');
-                })
-    }
-
-
-
+    })
+}
 </script>
