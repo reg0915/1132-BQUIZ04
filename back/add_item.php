@@ -42,7 +42,7 @@
 </tr>
 <tr>
     <td class="tt ct">商品介紹</td>
-    <td class="pp"><input type="intro" name="intro" id="intro"></td>
+        <td class="pp"><textarea name="intro" id="intro"></textarea></td>
 </tr>
 
 </table>
@@ -52,3 +52,42 @@
     <input type="reset" value="重置">
     <input type="button" value="返回">
 </div>
+
+<script>
+
+getTypes('big');
+
+$("#big").on("change",function(){
+    getTypes('mid');
+})
+
+
+
+    
+    function getTypes(type){
+let big_id=0;
+if(type=='mid'){
+    big_id=$("#big").val();
+}
+
+
+
+
+    $.get("./api/get_types.php",{type,big_id},function(types){
+        switch(type){
+case 'big':
+    $("#big").html(types)
+    getTypes('mid');
+    break;
+    case 'mid':
+    $("#mid").html(types)
+    break;
+
+
+
+        }
+      
+})
+
+    }
+</script>
