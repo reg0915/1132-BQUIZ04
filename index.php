@@ -11,7 +11,6 @@
     <link href="./css/css.css" rel="stylesheet" type="text/css">
     <script src="./js/jquery-3.4.1.min.js"></script>
     <script src="./js/js.js"></script>
-
 </head>
 
 <body>
@@ -53,8 +52,35 @@ if(empty($_SESSION['Mem'])){
 
            
         </div>
+
         <div id="left" class="ct">
             <div style="min-height:400px;">
+                <?php
+            $bigs=$Type->all(['big_id'=>0]);
+foreach($bigs as $big){
+                echo "<div class='ww'>";
+                echo    "<a href='?type={$big['id']}'>";
+                echo    $big['name'];
+                echo    "</a>";
+
+if($Type->count(['big_id'=>$big['id']])>0){
+                    $mids=$Type->all(['big_id'=>$big['id']]);
+                echo "<div class='s'>";
+                foreach($mids as $mid){
+                    echo "<a href='?type={$mid['id']}' style='background-color: #7ee185;'>";
+                    echo $mid['name'];
+                    echo "</a>";
+    }
+echo "</div>";
+}
+
+echo "</div>";
+
+
+            }
+
+?>
+
             </div>
             <span>
                 <div>進站總人數</div>
